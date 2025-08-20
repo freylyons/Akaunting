@@ -26,16 +26,13 @@ services:
 
   akaunting:
     image: docker.io/akaunting/akaunting:latest
-    build:
-      context: https://github.com:/akaunting/docker.git
-    volumes:
-      - ./akaunting_data:/var/www/html
     restart: unless-stopped
     env_file:
       - akaunting.run.env
     environment:
-      - AKAUNTING_SETUP
+      - AKAUNTING_SETUP=true
     depends_on:
+      - tailscale
       - akaunting_db
     networks:
       akaunting_net:
