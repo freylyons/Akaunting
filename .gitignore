@@ -1,2 +1,5 @@
 akaunting.run.env
 akaunting.db.env
+akaunting_data
+akaunting_db
+tailscale_state

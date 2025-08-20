@@ -25,10 +25,9 @@ services:
         ipv4_address: 172.15.5.4
 
   akaunting:
-    container_name: akaunting
     image: docker.io/akaunting/akaunting:latest
     build:
-      context: .
+      context: https://github.com:/akaunting/docker.git
     volumes:
       - ./akaunting_data:/var/www/html
     restart: unless-stopped
@@ -44,7 +43,6 @@ services:
         ipv4_address: 172.15.5.5
 
   akaunting_db:
-    container_name: akaunting-db
     image: mariadb
     volumes:
       - ./akaunting_db:/var/lib/mysql
