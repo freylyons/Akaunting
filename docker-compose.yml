@@ -1,0 +1,37 @@
+name: akaunting-dev
+services:
+
+  akaunting:
+    container_name: akaunting
+    image: docker.io/akaunting/akaunting:latest
+    build:
+      context: .
+    volumes:
+      - akaunting_data:/var/www/html
+    restart: unless-stopped
+    env_file:
+      - env/run.env
+    environment:
+      - AKAUNTING_SETUP
+    depends_on:
+      - akaunting_db
+    networks:
+      akaunting_net:
+
+  akaunting_db:
+    container_name: akaunting-db
+    image: mariadb
+    volumes:
+      - akaunting_db:/var/lib/mysql
+    restart: unless-stopped
+    env_file:
+      - env/db.env
+    networks:
+      akaunting_net:
+
+volumes:
+  akaunting_data:
+  akaunting_db:
+
+networks:
+  akaunting_net
